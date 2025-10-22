@@ -1,26 +1,111 @@
-@import "tailwindcss";
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+@import "tailwindcss/theme";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: light dark;
+    --color-accent: 16, 163, 74;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-gradient-to-br from-neutral-50 via-white to-neutral-100 
+           text-neutral-900 
+           dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950 
+           dark:text-neutral-50;
+    background-attachment: fixed;
+  }
+
+  @layer components {
+    .container {
+      @apply max-w-4xl mx-auto px-4;
+    }
+
+    .card {
+      @apply rounded-3xl border border-neutral-200/50 dark:border-neutral-800/50 
+             p-6 shadow-lg shadow-neutral-200/50 dark:shadow-neutral-900/50
+             bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl
+             transition-all duration-300 hover:shadow-xl hover:shadow-neutral-200/60
+             dark:hover:shadow-neutral-900/60 hover:-translate-y-0.5;
+    }
+
+    .btn {
+      @apply inline-flex items-center justify-center gap-2 rounded-2xl 
+             border border-neutral-300/80 dark:border-neutral-700/80 
+             px-5 py-2.5 font-medium
+             bg-transparent
+             hover:bg-neutral-100/80 dark:hover:bg-neutral-800/80 
+             transition-all duration-200 active:scale-95
+             shadow-sm hover:shadow-md
+             cursor-pointer;
+    }
+
+    .btn-primary {
+      @apply border-transparent 
+             bg-gradient-to-r from-neutral-800 to-neutral-900 
+             dark:from-white dark:to-neutral-100
+             text-white dark:text-neutral-900
+             shadow-md hover:shadow-lg
+             hover:from-neutral-900 hover:to-black
+             dark:hover:from-neutral-100 dark:hover:to-white
+             hover:bg-transparent;
+    }
+
+    .input {
+      @apply w-full rounded-2xl 
+             border border-neutral-300/60 dark:border-neutral-700/60 
+             bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm
+             px-4 py-3 
+             focus:outline-none focus:ring-2 focus:ring-neutral-400/50 
+             focus:border-neutral-400 dark:focus:border-neutral-600
+             transition-all duration-200
+             placeholder:text-neutral-400 dark:placeholder:text-neutral-600;
+    }
+
+    .label {
+      @apply block text-sm font-medium mb-2 
+             text-neutral-700 dark:text-neutral-300;
+    }
+
+    .section-title {
+      @apply text-2xl font-bold 
+             bg-gradient-to-r from-neutral-900 to-neutral-700 
+             dark:from-neutral-100 dark:to-neutral-300
+             bg-clip-text text-transparent;
+    }
+
+    .link {
+      @apply underline underline-offset-4 
+             decoration-neutral-400 hover:decoration-neutral-600
+             dark:decoration-neutral-600 dark:hover:decoration-neutral-400
+             transition-colors duration-200;
+    }
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-neutral-100 dark:bg-neutral-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300 dark:bg-neutral-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-400 dark:bg-neutral-600;
+  }
 }

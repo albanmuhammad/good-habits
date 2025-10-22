@@ -68,6 +68,7 @@ export async function getUserProfile() {
 
 // Sign out
 export async function signOut() {
+  'use server'
   const supabase = await createClientFromRequest()
   await supabase.auth.signOut()
   redirect('/login')

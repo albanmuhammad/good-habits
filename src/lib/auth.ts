@@ -1,9 +1,11 @@
+// lib/auth.ts
 import { createClientFromRequest } from './supabase/server'
 import { redirect } from 'next/navigation'
 import { cache } from 'react'
+import type { User, UserProfile, Session } from '@/types/auth'
 
 // Cache the user session for the duration of the request
-export const getUser = cache(async () => {
+export const getUser = cache(async (): Promise<User | null> => {
   const supabase = await createClientFromRequest()
   const { data: { user }, error } = await supabase.auth.getUser()
   
@@ -11,11 +13,18 @@ export const getUser = cache(async () => {
     return null
   }
   
-  return user
+  // Map Supabase user to your User type
+  return {
+    id: user.id,
+    email: user.email ?? '',
+    name: user.user_metadata?.name,
+    created_at: user.created_at,
+    updated_at: user.updated_at,
+  }
 })
 
 // Get user or redirect to login if not authenticated
-export async function requireUser() {
+export async function requireUser(): Promise<User> {
   const user = await getUser()
   
   if (!user) {
@@ -26,7 +35,7 @@ export async function requireUser() {
 }
 
 // Get session
-export const getSession = cache(async () => {
+export const getSession = cache(async (): Promise<Session | null> => {
   const supabase = await createClientFromRequest()
   const { data: { session }, error } = await supabase.auth.getSession()
   
@@ -37,14 +46,15 @@ export const getSession = cache(async () => {
   return session
 })
 
+
 // Check if user is authenticated
-export async function isAuthenticated() {
+export async function isAuthenticated(): Promise<boolean> {
   const user = await getUser()
   return !!user
 }
 
 // Get user profile (jika Anda punya tabel profiles)
-export async function getUserProfile() {
+export async function getUserProfile(): Promise<UserProfile | null> {
   const user = await getUser()
   
   if (!user) {
@@ -55,8 +65,7 @@ export async function getUserProfile() {
   const { data, error } = await supabase
     .from('profiles')
     .select('*')
-    .eq('id', user.id)
-    .single()
+    .single<UserProfile>()
   
   if (error) {
     console.error('Error fetching profile:', error)
@@ -67,7 +76,7 @@ export async function getUserProfile() {
 }
 
 // Sign out
-export async function signOut() {
+export async function signOut(): Promise<void> {
   'use server'
   const supabase = await createClientFromRequest()
   await supabase.auth.signOut()

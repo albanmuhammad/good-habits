@@ -1,5 +1,5 @@
 'use client'
-import { cn } from '../utils'
+import { cn } from '@/lib/utils'
 import React from 'react'
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'default' | 'primary' }

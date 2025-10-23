@@ -1,18 +1,27 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import Header from '@/components/Header'
+// app/layout.tsx
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import { Providers } from "./providers"
+import "./globals.css"
+
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: 'Habit Tracker',
-  description: 'Minimal monochrome habit tracker',
+  title: "Habit Tracker - Bangun Kebiasaan yang Bertahan",
+  description: "Lacak, tingkatkan, dan capai target harianmu dengan cara yang sederhana dan menyenangkan",
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang='id'>
-      <body>
-        <Header />
-        {children}
+    <html lang="id" suppressHydrationWarning>
+      <body className={inter.className}>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   )

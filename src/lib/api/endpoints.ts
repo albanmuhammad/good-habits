@@ -1,11 +1,11 @@
 // lib/api/endpoints.ts
 export const API_ENDPOINTS = {
   auth: {
-    login: '/api/auth/login',
-    register: '/api/auth/register',
-    logout: '/api/auth/logout',
-    me: '/api/auth/me',
-    refresh: '/api/auth/refresh',
+    login: 'auth/login',
+    register: 'auth/register',
+    logout: 'auth/logout',
+    me: 'auth/me',
+    refresh: 'auth/refresh',
   },
   habits: {
     list: '/api/habits',

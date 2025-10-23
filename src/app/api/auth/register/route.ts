@@ -1,8 +1,9 @@
 // app/api/auth/register/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-import { createClientFromRequest } from '@/lib/supabase/server'
 import { z } from 'zod'
-import type { ApiResponse, ApiError } from '@/types/api/responses'
+
+import { createClientFromRequest } from '@/lib/supabase/server'
+import type { ApiError, ApiResponse } from '@/types/api/responses'
 
 const RegisterSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -14,7 +15,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { email, password, name } = RegisterSchema.parse(body)
-    
+
     const supabase = await createClientFromRequest()
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -25,31 +26,49 @@ export async function POST(request: NextRequest) {
         },
       },
     })
-    
+
     if (error) {
       return NextResponse.json<ApiError>(
         {
           success: false,
           error: {
             code: 'AUTH_ERROR',
-            message: error.message
-          }
+            message: error.message,
+          },
         },
         { status: 400 }
       )
     }
-    
+
+    const identities = data.user?.identities ?? []
+    if (identities.length === 0) {
+      return NextResponse.json<ApiError>(
+        {
+          success: false,
+          error: {
+            code: 'USER_EXISTS',
+            message: 'Email sudah terdaftar. Silakan masuk.',
+          },
+        },
+        { status: 409 }
+      )
+    }
+
     return NextResponse.json<ApiResponse>(
       {
         success: true,
         data: {
-          user: data.user ? {
-            id: data.user.id,
-            email: data.user.email,
-            name: data.user.user_metadata?.name,
-          } : null,
+          user: data.user
+            ? {
+                id: data.user.id,
+                email: data.user.email,
+                name: data.user.user_metadata?.name,
+              }
+            : null,
         },
-        message: 'Registration successful. Please check your email to verify your account.'
+        message: data.user?.confirmed_at
+          ? 'Registration successful.'
+          : 'Registration successful. Please check your email to verify your account.',
       },
       { status: 201 }
     )
@@ -61,20 +80,20 @@ export async function POST(request: NextRequest) {
           error: {
             code: 'VALIDATION_ERROR',
             message: 'Invalid request data',
-            details: error.cause
-          }
+            details: error.flatten(),
+          },
         },
         { status: 400 }
       )
     }
-    
+
     return NextResponse.json<ApiError>(
       {
         success: false,
         error: {
           code: 'INTERNAL_ERROR',
-          message: 'Registration failed'
-        }
+          message: 'Registration failed',
+        },
       },
       { status: 500 }
     )

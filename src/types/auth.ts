@@ -43,7 +43,7 @@ export interface AuthState {
 
 // Auth response types
 export type AuthResult<T = void> = 
-  | { success: true; data: T }
+  | { success: true; data: T; message?: string }
   | { success: false; error: string }
 
 export interface SignInCredentials {

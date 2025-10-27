@@ -2,6 +2,7 @@ import Link from 'next/link'
 import HabitCard from '@/components/features/habits/HabitCard'
 import { requireUser } from '@/lib/auth'
 import { createClientFromRequest } from '@/lib/supabase/server'
+import SubscribeButton from '@/components/SubscribeButton' // <--- IMPORT BARU
 
 export default async function Home() {
     const user = await requireUser()
@@ -16,8 +17,19 @@ export default async function Home() {
     return (
         <main className="container py-8 space-y-6">
             <header className="flex items-center justify-between">
-                <h1 className="section-title">Kebiasaannn</h1>
-                <Link href="/habits/new" className="btn">+ Tambah</Link>
+                <div> {/* <--- Tambahkan div wrapper */}
+                    <h1 className="section-title">Kebiasaannn</h1>
+                </div>
+                <div className="flex items-center gap-4"> {/* <--- Tambahkan div wrapper */}
+                    {/* TOMBOL BARU ANDA */}
+                    <SubscribeButton
+                        userEmail={user.email}
+                        userName={user.name || ''}
+                    />
+
+                    {/* Tombol lama Anda */}
+                    <Link href="/habits/new" className="btn">+ Tambah</Link>
+                </div>
             </header>
 
             <section className="grid gap-3">

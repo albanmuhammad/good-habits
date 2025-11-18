@@ -18,7 +18,7 @@ const TRACKING_COOKIE_NAME = "sfmc_conv_tracking";
 // boleh kamu ganti dengan NEXT_PUBLIC_SFMC_CONVERSION_BASE
 // misalnya: https://click.s4.exacttarget.com
 const BASE_CONVERSION_URL =
-    process.env.NEXT_PUBLIC_SFMC_CONVERSION_BASE || "https://click.exacttarget.com";
+    process.env.NEXT_PUBLIC_SFMC_CONVERSION_BASE || "https://click.s11.exacttarget.com";
 
 /**
  * Helper sederhana untuk baca cookie di browser

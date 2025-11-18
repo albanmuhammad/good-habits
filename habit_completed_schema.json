@@ -1,0 +1,67 @@
+{
+  "records": [
+    {
+      "masterLabel": "Habit Completed",
+      "developerName": "habitCompleted",
+      "category": "Engagement",
+      "externalDataTranFields": [
+        {
+          "masterLabel": "category",
+          "developerName": "category",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "dateTime",
+          "developerName": "dateTime",
+          "dataType": "DateTime",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "deviceId",
+          "developerName": "deviceId",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "eventId",
+          "developerName": "eventId",
+          "dataType": "Text",
+          "isDataRequired": true,
+          "primaryIndexOrder": 1
+        },
+        {
+          "masterLabel": "eventType",
+          "developerName": "eventType",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "sessionId",
+          "developerName": "sessionId",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+
+        {
+          "masterLabel": "userId",
+          "developerName": "userId",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "habitId",
+          "developerName": "habitId",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "habitName",
+          "developerName": "habitName",
+          "dataType": "Text",
+          "isDataRequired": false
+        }
+      ]
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import HabitCard from '@/components/features/habits/HabitCard'
 import { requireUser } from '@/lib/auth'
 import { createClientFromRequest } from '@/lib/supabase/server'
 import SubscribeButton from '@/components/SubscribeButton' // <--- IMPORT BARU
+import TrackHabitButton from '@/components/TrackHabbitButton'
 
 export default async function Home() {
     const user = await requireUser()
@@ -25,6 +26,13 @@ export default async function Home() {
                     <SubscribeButton
                         userEmail={user.email}
                         userName={user.name || ''}
+                    />
+
+                    <TrackHabitButton
+                        habitId="hab0001"
+                        habitName="drinkwater"
+                        userId={user.id}
+                        variant="secondary"
                     />
 
                     {/* Tombol lama Anda */}

@@ -1,0 +1,78 @@
+openapi: 3.0.0
+info:
+  title: Habit Tracking API
+  description: API schema for habit completion events and user profiles
+  version: 1.0.0
+
+components:
+  schemas:
+    HabitCompleted:
+      type: object
+      required:
+        - category
+        - dateTime
+        - deviceId
+        - eventId
+        - sessionId
+        - eventType
+      properties:
+        category:
+          type: string
+          description: Category of the event
+          example: "Engagement"
+        dateTime:
+          type: string
+          format: date-time
+          description: Timestamp when the habit was completed
+        deviceId:
+          type: string
+          description: Unique identifier for the device
+        eventId:
+          type: string
+          description: Primary unique identifier for the event
+        userId:
+          type: string
+          description: Identifier for the user (optional)
+        habitId:
+          type: string
+          description: Unique identifier for the habit (optional)
+        habitName:
+          type: string
+          description: Name of the completed habit (optional)
+        sessionId:
+          type: string
+          description: Session identifier for the event
+        eventType:
+          type: string
+          description: Type of event being tracked
+
+    UserProfile:
+      type: object
+      required:
+        - userId
+      properties:
+        userId:
+          type: string
+          description: Unique identifier for the user
+        sessionId:
+          type: string
+          description: Session identifier for the event
+        userName:
+          type: string
+          description: Display name of the user (optional)
+        email:
+          type: string
+          format: email
+          description: Email address of the user (optional)
+        avatarUrl:
+          type: string
+          description: URL to user's avatar image (optional)
+          example: "https://example.com/avatar.jpg"
+        timezone:
+          type: string
+          description: User's timezone (optional)
+          example: "Asia/Jakarta"
+        createdAt:
+          type: string
+          format: date-time
+          description: When the user profile was first created (optional)

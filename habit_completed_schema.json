@@ -62,6 +62,75 @@
           "isDataRequired": false
         }
       ]
+    },
+    {
+      "masterLabel": "Email Button Converted",
+      "developerName": "emailButtonConverted",
+      "category": "Engagement",
+      "externalDataTranFields": [
+        {
+          "masterLabel": "category",
+          "developerName": "category",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "dateTime",
+          "developerName": "dateTime",
+          "dataType": "DateTime",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "deviceId",
+          "developerName": "deviceId",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "eventId",
+          "developerName": "eventId",
+          "dataType": "Text",
+          "isDataRequired": true,
+          "primaryIndexOrder": 1
+        },
+        {
+          "masterLabel": "eventType",
+          "developerName": "eventType",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "sessionId",
+          "developerName": "sessionId",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+
+        {
+          "masterLabel": "userId",
+          "developerName": "userId",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "emailId",
+          "developerName": "emailId",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "jobId",
+          "developerName": "jobId",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "actionId",
+          "developerName": "actionId",
+          "dataType": "Text",
+          "isDataRequired": false
+        }
+      ]
     }
   ]
 }

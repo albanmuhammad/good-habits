@@ -7,13 +7,25 @@ export interface HabitCompletedEvent {
 /**
  * EVENT yang dikirim ke Salesforce Interactions
  */
+// types/salesforce.ts
 export interface SalesforceEventPayload {
   eventType: string
   interaction: {
     name: string
     eventType: string
     category: string
-    attributes: Record<string, unknown>
+
+    // untuk Habit Completed
+    habitId?: string
+    habitName?: string
+
+    // untuk Email Button Converted
+    emailId?: string
+    jobId?: string
+    actionId?: string
+
+    // umum
+    userId?: string
   }
   user?: {
     userId?: string
@@ -26,6 +38,7 @@ export interface SalesforceEventPayload {
     channel?: string
   }
 }
+
 
 /**
  * Config untuk init()

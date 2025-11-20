@@ -29,8 +29,8 @@ export default async function Home() {
                     />
 
                     <TrackHabitButton
-                        habitId="hab0001"
-                        habitName="drinkwater"
+                        habitId="hab0002"
+                        habitName="studying"
                         userId={user.id}
                         variant="secondary"
                     />

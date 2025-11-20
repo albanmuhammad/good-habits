@@ -14,12 +14,10 @@ export const trackHabitCompleted = (data: HabitCompletedEvent): boolean => {
       interaction: {
         name: "Habit Completed",
         eventType: "habitCompleted",
-        category: "Engagement",
-        attributes: {
-          habitId: data.habitId,
-          habitName: data.habitName,
-          userId: data.userId ?? null,
-        }
+        category: "Engagement", 
+        habitId: data.habitId,
+        habitName: data.habitName,
+        userId: data.userId! ?? null
       },
       user: data.userId ? { userId: data.userId } : undefined,
       source: {
